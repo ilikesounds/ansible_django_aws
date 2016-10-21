@@ -1,0 +1,37 @@
+user_home: /home/ubuntu
+django_project_name: django_imager
+django_home: "{{ user_home }}/{{ django_project_name }}"
+venv_home: "{{ user_home }}/venv"
+media_path: "{{ django_home }}/media"
+static_path: "{{ django_home }}/static"
+rds_db_instance: "{{ django_project_name }}-db"
+system_packages:
+  - build-essential
+  - python-dev
+  - python-pip
+  - postgresql-client
+  - libpq-dev
+  - python-psycopg2
+  - git
+  - python-virtualenv
+  - libjpeg-dev
+  - libtiff-dev
+  - libjpeg8-dev
+  - zlib1g-dev
+  - libfreetype6-dev
+  - liblcms2-dev
+  - libwebp-dev
+  - tcl8.6-dev
+  - tk8.6-dev
+  - django
+
+repo: https://github.com/ilikesounds/django-imager.git
+repo_version: master
+django_settings: "{{ django_project_name }}.settings"
+DBUSER: j
+DBPORT: 5432
+DBNAME: "{{ rds_db_instance }}"
+DEBUG: False
+EMAIL_USER: picturecrap
+EMAIL_DEFAULT: "picturecrap@gmail.com"
+app_user: 'www-data'

@@ -1,0 +1,17 @@
+---
+
+- name: Create RDS instance
+  local_action:
+    module: rds
+    command: create
+    db_engine: postgres
+    db_name: imager_db
+    instance_name: django-imager-db
+    instance_type: db.t2.micro
+    license_model: postgresql-license
+    vpc_security_groups: sg-2edc0d57
+    zone: '{{ zone }}'
+    region: "{{ region }}"
+    size: 5
+    username: imageruser
+    password: "{{ db_password }}"

@@ -1,0 +1,5 @@
+---
+
+provision_servers: no
+debug: False
+sec_key: "{{ lookup('env', 'FL_SECURITY_KEY') }}"

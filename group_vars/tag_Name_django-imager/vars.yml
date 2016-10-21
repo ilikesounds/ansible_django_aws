@@ -1,0 +1,5 @@
+---
+
+EMAIL_PW: "{{ vault_EMAIL_PW }}"
+FL_SECURITY_KEY: "{{ vault_FL_SECURITY_KEY }}"
+DBPASS: "{{ vault_DBPASS }}"
