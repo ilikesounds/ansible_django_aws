@@ -9,7 +9,7 @@
   git: repo={{ repo }}
     dest={{ django_home }}
     force=yes depth=1
-    verision={{ repo_version }}
+    version={{ repo_version }}
 
 - name: Install Python Dependencies
   pip:
@@ -20,19 +20,18 @@
 - name: Get DB Hostvars
   set_fact:
     db_host: "{{ hostvars[groups[rds_db_instance][0]] }}"
-    debug: db_host
 
 - name: Set DB URL
   set_fact:
-    db_url: "{{ db_host.ec2_engine }}://{{ db_host.ec2_master_username }}:{{ DBPASS }}@{{ db_host.ec2__address }}:{{ db_host.ec2__port }}/{{ db_host.ec2_DBName }}"
+    db_url: "{{ db_host.ec2_engine }}://{{ db_host.ec2_master_username }}:{{ DBPASS_VAULT }}@{{ db_host.ec2__address }}:{{ db_host.ec2__port }}/{{ db_host.ec2_DBName }}"
 
 - name: Run Migrations
   environment:
-    DJANGO_SECURITY_KEY: "{{ DJANGO_SECURITY_KEY }}"
+    DJANGO_IMAGER_SK: "{{ DJANGO_SECURITY_KEY }}"
     DBURL: "{{ db_host.ec2__address }}"
     DBUSER: "{{ DBUSER }}"
     DBPORT: "{{ DBPORT }}"
-    DBPASS: "{{ DBPASS }}"
+    DBPASS: "{{ DBPASS_VAULT }}"
     DBNAME: "{{ DBNAME }}"
     EMAIL_USER: "{{ EMAIL_USER }}"
     EMAIL_DEFAULT: "{{ EMAIL_DEFAULT }}"
@@ -56,11 +55,11 @@
 - name: Collect Static Files
   become: true
   environment:
-    django_security_key: "{{ DJANGO_SECURITY_KEY }}"
+    DJANGO_IMAGER_SK: "{{ DJANGO_SECURITY_KEY }}"
     DBURL: "{{ db_host.ec2__address }}"
     DBUSER: "{{ DBUSER }}"
     DBPORT: "{{ DBPORT }}"
-    DBPASS: "{{ DBPASS }}"
+    DBPASS: "{{ DBPASS_VAULT }}"
     DBNAME: "{{ DBNAME }}"
     EMAIL_USER: "{{ EMAIL_USER }}"
     EMAIL_DEFAULT: "{{ EMAIL_DEFAULT }}"
@@ -69,5 +68,5 @@
   django_manage:
     virtualenv: "{{ venv_home }}"
     app_path: "{{ django_home }}"
-    settings: "{{ django_project_name }}.settings"
+    settings: "{{ django_settings }}"
     command: collectstatic

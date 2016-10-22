@@ -1,0 +1,6 @@
+---
+
+- name: Provision RDS instance
+  hosts: localhost
+  roles:
+    - rds_provisioning

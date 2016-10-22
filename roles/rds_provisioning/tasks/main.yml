@@ -9,9 +9,9 @@
     instance_name: django-imager-db
     instance_type: db.t2.micro
     license_model: postgresql-license
-    vpc_security_groups: sg-2edc0d57
+    vpc_security_groups: sg-2a459053
     zone: '{{ zone }}'
     region: "{{ region }}"
     size: 5
     username: imageruser
-    password: "{{ db_password }}"
+    password: "{{ DBPASS_VAULT }}"
