@@ -1,5 +1,5 @@
 keypair: init_key_pair
-django_project_name: django-imager
+django_project_name: django_imager
 security_group: ssh-access
 instance_type: t2.micro
 ami: ami-d732f0b7

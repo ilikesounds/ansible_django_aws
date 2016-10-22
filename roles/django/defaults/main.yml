@@ -1,10 +1,10 @@
 user_home: /home/ubuntu
-django_project_name: django_imager
 django_home: "{{ user_home }}/{{ django_project_name }}"
+django_project_name: django_imager
 venv_home: "{{ user_home }}/venv"
 media_path: "{{ django_home }}/media"
 static_path: "{{ django_home }}/static"
-rds_db_instance: "{{ django_project_name }}-db"
+rds_db_instance: django-imager-db
 system_packages:
   - build-essential
   - python-dev
@@ -23,14 +23,14 @@ system_packages:
   - libwebp-dev
   - tcl8.6-dev
   - tk8.6-dev
-  - django
 
 repo: https://github.com/ilikesounds/django-imager.git
 repo_version: master
-django_settings: "{{ django_project_name }}.settings"
-DBUSER: j
+django_settings: imagersite.settings
+DBUSER: imageruser
 DBPORT: 5432
-DBNAME: "{{ rds_db_instance }}"
+DBNAME: imager_db
+DBPASS: "{{ DBPASS_VAULT }}"
 DEBUG: False
 EMAIL_USER: picturecrap
 EMAIL_DEFAULT: "picturecrap@gmail.com"

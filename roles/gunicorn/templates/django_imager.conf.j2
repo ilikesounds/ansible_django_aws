@@ -1,4 +1,4 @@
-description 'foodlust'
+description 'django_imager'
 
 start on (filesystem)
 stop on runlevel [016]
@@ -7,8 +7,8 @@ respawn
 setuid {{ app_user }}
 setgid {{ app_user }}
 chdir {{ django_home }}
-env DJANGO_SETTINGS_MODULE=foodlust.settings
-env FL_SECURITY_KEY='{{ FL_SECURITY_KEY }}'
+env DJANGO_SETTINGS_MODULE=imagersite.settings
+env DJANGO_IMAGER_SK='{{ DJANGO_SECURITY_KEY }}'
 env ALLOWED_HOSTS='{{ db_host.ec2__address }}'
 env DBURL='{{ db_host.ec2__address }}'
 env DBUSER='{{ DBUSER }}'
@@ -19,4 +19,4 @@ env EMAIL_USER='{{ EMAIL_USER }}'
 env EMAIL_DEFAULT='{{ EMAIL_DEFAULT }}'
 env EMAIL_PW='{{ EMAIL_PW }}'
 env DEBUG=False
-exec {{ venv_home }}/bin/gunicorn -b 127.0.0.1:8000 -w 4 foodlust.wsgi --error-logfile /tmp/gunicorn-error.log
+exec {{ venv_home }}/bin/gunicorn -b 127.0.0.1:8000 -w 4 imagersite.wsgi --error-logfile /tmp/gunicorn-error.log

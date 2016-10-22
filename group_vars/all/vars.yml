@@ -2,4 +2,4 @@
 
 EMAIL_PW: "{{ vault_EMAIL_PW }}"
 DJANGO_SECURITY_KEY: "{{ vault_DJANGO_SECURITY_KEY }}"
-DBPASS: "{{ vault_DBPASS }}"
+DBPASS_VAULT: "{{ vault_DBPASS }}"
